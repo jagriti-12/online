@@ -125,7 +125,7 @@ async function setupDatabase() {
 
   // Insert sample data
   await insertSampleData();
-  
+
   console.log('🎉 Database setup completed successfully!');
   console.log('\n📧 Owner Login Credentials:');
   console.log('Email: owner@glamourcosmetics.com');
@@ -133,7 +133,7 @@ async function setupDatabase() {
   console.log('\n👤 Test User Login Credentials:');
   console.log('Email: user@example.com');
   console.log('Password: User123!');
-  
+
   db.close();
 }
 
@@ -201,30 +201,30 @@ async function insertSampleData() {
   // Insert products
   const products = [
     // Lipsticks
-    { name: 'Ruby Red Lipstick', description: 'Classic ruby red lipstick with long-lasting formula', price: 24.99, originalPrice: 29.99, brand: 'GlamourCosmetics', stock: 50, categoryId: 1, featured: 1 },
+    { name: 'Ruby Red Lipstick', description: 'Classic ruby red lipstick with long-lasting formula', price: 24.99, originalPrice: 29.99, brand: 'GlamourCosmetics', stock: 50, categoryId: 1, featured: 1, imageUrl: 'public/images/ruby-red.jpg' },
     { name: 'Rose Pink Lipstick', description: 'Soft rose pink shade perfect for everyday wear', price: 22.99, brand: 'GlamourCosmetics', stock: 45, categoryId: 1, featured: 1 },
     { name: 'Berry Burst Lipstick', description: 'Deep berry shade with matte finish', price: 26.99, brand: 'GlamourCosmetics', stock: 30, categoryId: 1, featured: 0 },
     { name: 'Coral Dream Lipstick', description: 'Vibrant coral shade with creamy texture', price: 23.99, brand: 'GlamourCosmetics', stock: 40, categoryId: 1, featured: 1 },
-    
+
     // Lip Liners
     { name: 'Precision Red Liner', description: 'Perfect red lip liner for precise application', price: 12.99, brand: 'GlamourCosmetics', stock: 60, categoryId: 2, featured: 0 },
     { name: 'Nude Pink Liner', description: 'Natural nude pink liner for everyday use', price: 11.99, brand: 'GlamourCosmetics', stock: 55, categoryId: 2, featured: 0 },
     { name: 'Deep Berry Liner', description: 'Rich berry liner for bold looks', price: 13.99, brand: 'GlamourCosmetics', stock: 35, categoryId: 2, featured: 0 },
-    
+
     // Foundation
     { name: 'Flawless Coverage Foundation', description: 'Full coverage foundation for all-day wear', price: 39.99, originalPrice: 44.99, brand: 'GlamourCosmetics', stock: 25, categoryId: 3, featured: 1 },
     { name: 'Natural Glow Foundation', description: 'Medium coverage with natural finish', price: 34.99, brand: 'GlamourCosmetics', stock: 30, categoryId: 3, featured: 0 },
     { name: 'Matte Perfection Foundation', description: 'Oil-free matte foundation for oily skin', price: 36.99, brand: 'GlamourCosmetics', stock: 20, categoryId: 3, featured: 0 },
-    
+
     // Eyeshadow
     { name: 'Sunset Palette', description: '12-shade eyeshadow palette with warm tones', price: 49.99, originalPrice: 59.99, brand: 'GlamourCosmetics', stock: 15, categoryId: 4, featured: 1 },
     { name: 'Smoky Eyes Palette', description: 'Professional smoky eye palette with 8 shades', price: 42.99, brand: 'GlamourCosmetics', stock: 20, categoryId: 4, featured: 0 },
     { name: 'Natural Nudes Palette', description: 'Everyday nude eyeshadow palette', price: 38.99, brand: 'GlamourCosmetics', stock: 25, categoryId: 4, featured: 0 },
-    
+
     // Mascara
     { name: 'Volume Max Mascara', description: 'Dramatic volume and length mascara', price: 18.99, brand: 'GlamourCosmetics', stock: 40, categoryId: 5, featured: 0 },
     { name: 'Waterproof Mascara', description: 'Long-lasting waterproof formula', price: 21.99, brand: 'GlamourCosmetics', stock: 35, categoryId: 5, featured: 0 },
-    
+
     // Blush
     { name: 'Peachy Keen Blush', description: 'Natural peach blush for a healthy glow', price: 16.99, brand: 'GlamourCosmetics', stock: 45, categoryId: 6, featured: 0 },
     { name: 'Rose Gold Blush', description: 'Shimmery rose gold blush for special occasions', price: 19.99, brand: 'GlamourCosmetics', stock: 30, categoryId: 6, featured: 0 }
@@ -233,8 +233,8 @@ async function insertSampleData() {
   for (const product of products) {
     await new Promise((resolve, reject) => {
       db.run(
-        'INSERT OR IGNORE INTO products (name, description, price, originalPrice, brand, stock, categoryId, featured) VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
-        [product.name, product.description, product.price, product.originalPrice || null, product.brand, product.stock, product.categoryId, product.featured],
+        'INSERT OR IGNORE INTO products (name, description, price, originalPrice, brand, stock, categoryId, featured, imageUrl) VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
+        [product.name, product.description, product.price, product.originalPrice || null, product.brand, product.stock, product.categoryId, product.featured, product.imageUrl || null],
         (err) => {
           if (err) reject(err);
           else resolve();
